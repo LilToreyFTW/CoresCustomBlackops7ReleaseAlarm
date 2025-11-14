@@ -323,6 +323,69 @@ body {
     color: #fff;
 }
 
+.timezone-info {
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(42, 42, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.timezone-title {
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cod-gold);
+    margin-bottom: 25px;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.timezone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.timezone-item {
+    background: rgba(26, 26, 26, 0.6);
+    border: 1px solid rgba(227, 30, 36, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.timezone-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(227, 30, 36, 0.6);
+    box-shadow: 0 5px 15px rgba(227, 30, 36, 0.3);
+}
+
+.timezone-region {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.timezone-time {
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cod-gold);
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.timezone-date {
+    font-size: 0.85rem;
+    color: var(--cod-blue);
+    font-weight: 400;
+}
+
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -882,6 +945,28 @@ body {
     
     .vault-edition-image-container {
         margin: 20px 0;
+    }
+    
+    .timezone-info {
+        padding: 20px 15px;
+        margin: 30px 0;
+    }
+    
+    .timezone-title {
+        font-size: 1.3rem;
+    }
+    
+    .timezone-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .timezone-item {
+        padding: 15px;
+    }
+    
+    .timezone-time {
+        font-size: 1.1rem;
     }
 }
 

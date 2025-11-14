@@ -40,6 +40,47 @@ export default function Home() {
           
           <Timer onLaunch={() => setShowAlert(true)} />
 
+          <div className="timezone-info">
+            <h3 className="timezone-title">Launch Times by Region</h3>
+            <div className="timezone-grid">
+              <div className="timezone-item">
+                <div className="timezone-region">West Coast North America</div>
+                <div className="timezone-time">9:00 PM PST</div>
+                <div className="timezone-date">Nov. 13</div>
+              </div>
+              <div className="timezone-item">
+                <div className="timezone-region">East Coast North America</div>
+                <div className="timezone-time">12:00 AM EST</div>
+                <div className="timezone-date">Nov. 14</div>
+              </div>
+              <div className="timezone-item">
+                <div className="timezone-region">Brazil</div>
+                <div className="timezone-time">12:00 AM BRT</div>
+                <div className="timezone-date">Nov. 14</div>
+              </div>
+              <div className="timezone-item">
+                <div className="timezone-region">United Kingdom</div>
+                <div className="timezone-time">12:00 AM GMT</div>
+                <div className="timezone-date">Nov. 14</div>
+              </div>
+              <div className="timezone-item">
+                <div className="timezone-region">Western Europe</div>
+                <div className="timezone-time">12:00 AM CET</div>
+                <div className="timezone-date">Nov. 14</div>
+              </div>
+              <div className="timezone-item">
+                <div className="timezone-region">Japan</div>
+                <div className="timezone-time">12:00 AM JST</div>
+                <div className="timezone-date">Nov. 14</div>
+              </div>
+              <div className="timezone-item">
+                <div className="timezone-region">East Coast Australia</div>
+                <div className="timezone-time">12:00 AM AEDT</div>
+                <div className="timezone-date">Nov. 14</div>
+              </div>
+            </div>
+          </div>
+
           <div className="info-grid">
             <div className="info-card">
               <div className="info-icon">🎮</div>
