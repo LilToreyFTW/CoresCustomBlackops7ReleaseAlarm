@@ -192,7 +192,7 @@ export default function Home() {
                 <h3 className="kick-preview-title">Latest VOD</h3>
                 <iframe 
                   className="trailer-video kick-video"
-                  src="https://player.kick.com/liltorey/videos/53dc400d-213c-4a6b-9722-ca1c88a62929"
+                  src="https://player.kick.com/liltorey?video=53dc400d-213c-4a6b-9722-ca1c88a62929"
                   title="Latest Kick VOD"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
