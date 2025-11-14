@@ -1,0 +1,84 @@
+'use client'
+
+import { useEffect, useState, useRef } from 'react'
+import Image from 'next/image'
+import Timer from '@/components/Timer'
+import Alert from '@/components/Alert'
+import Particles from '@/components/Particles'
+
+export default function Home() {
+  const [showAlert, setShowAlert] = useState(false)
+
+  return (
+    <>
+      <div className="background-overlay"></div>
+      <Particles />
+      
+      <div className="container">
+        <header className="main-header">
+          <div className="cod-logo">CALL OF DUTY</div>
+          <div className="game-title">BLACK OPS 7</div>
+        </header>
+
+        <div className="content">
+          <div className="header-image-container">
+            <Image
+              src="/game_launch_header_image/game_launch.png"
+              alt="Black Ops 7 Launch"
+              width={1200}
+              height={600}
+              className="header-image"
+              priority
+            />
+          </div>
+
+          <div className="launch-info">
+            <h1 className="title">OPERATION LAUNCH</h1>
+            <p className="subtitle">Available at Midnight PST</p>
+            <p className="date">November 14, 2025</p>
+          </div>
+          
+          <Timer onLaunch={() => setShowAlert(true)} />
+
+          <div className="info-grid">
+            <div className="info-card">
+              <div className="info-icon">🎮</div>
+              <div className="info-title">Platforms</div>
+              <div className="info-text">PC • Xbox • PlayStation</div>
+            </div>
+            <div className="info-card">
+              <div className="info-icon">⏱️</div>
+              <div className="info-title">Preload</div>
+              <div className="info-text">Available Now</div>
+            </div>
+            <div className="info-card">
+              <div className="info-icon">🌐</div>
+              <div className="info-title">Timezone</div>
+              <div className="info-text">Pacific Standard Time</div>
+            </div>
+          </div>
+
+          <div className="trailer-container">
+            <h2 className="section-title">OFFICIAL TRAILER</h2>
+            <iframe 
+              className="trailer-video"
+              src="https://www.youtube.com/embed/7qX66lBJHTg?start=1&autoplay=0&rel=0"
+              title="Black Ops 7 Trailer"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+
+          <footer className="footer">
+            <p>Stay locked and loaded. The mission begins soon.</p>
+            <p className="footer-small">© 2025 Activision Publishing, Inc. All rights reserved.</p>
+          </footer>
+        </div>
+      </div>
+      
+      <Alert show={showAlert} onDismiss={() => setShowAlert(false)} />
+    </>
+  )
+}
+

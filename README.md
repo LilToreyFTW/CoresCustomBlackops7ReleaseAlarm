@@ -1,6 +1,6 @@
 # Call of Duty: Black Ops 7 - Launch Countdown Timer
 
-A professional, fully-featured countdown timer website for Call of Duty: Black Ops 7 launch. Built with modern web technologies and featuring a military-themed design.
+A professional, fully-featured Next.js countdown timer website for Call of Duty: Black Ops 7 launch. Built with Next.js 14, React, and TypeScript, optimized for Vercel deployment.
 
 ## 🎮 Features
 
@@ -11,10 +11,38 @@ A professional, fully-featured countdown timer website for Call of Duty: Black O
 - 🎨 **COD-Themed Design** - Military-inspired UI with animations and particle effects
 - 🎬 **Official Trailer** - Embedded YouTube trailer for the game
 - ⚡ **Live Status Updates** - Dynamic status messages based on time remaining
+- 🚀 **Next.js 14** - Built with the latest Next.js App Router
+- ⚛️ **React 18** - Modern React with hooks
+- 📘 **TypeScript** - Fully typed for better development experience
 
-## 🚀 Live Website
+## 🚀 Quick Start
 
-Visit the live site: [Deployed on Vercel](https://your-repo-name.vercel.app)
+### Prerequisites
+
+- Node.js 18+ installed
+- npm or yarn package manager
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Build for Production
+
+```bash
+# Build the application
+npm run build
+
+# Start production server
+npm start
+```
 
 ## 📋 Launch Details
 
@@ -24,54 +52,59 @@ Visit the live site: [Deployed on Vercel](https://your-repo-name.vercel.app)
 
 ## 🛠️ Technologies Used
 
-- HTML5
-- CSS3 (with animations and gradients)
-- Vanilla JavaScript (ES6+)
-- Google Fonts (Orbitron, Rajdhani)
-- YouTube Embed API
+- **Next.js 14** - React framework with App Router
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **CSS Modules** - Styled components
+- **Google Fonts** - Orbitron & Rajdhani fonts
+- **YouTube Embed API** - Video integration
 
 ## 📁 Project Structure
 
 ```
 GameLaunchAlarm/
-├── index.html              # Main HTML file
-├── styles.css              # All styling and animations
-├── timer.js                # Countdown logic and functionality
-├── game_launch_header_image/
-│   └── game_launch.png     # Header image
-├── README.md               # This file
-└── vercel.json             # Vercel deployment configuration
+├── app/
+│   ├── layout.tsx          # Root layout with fonts
+│   ├── page.tsx            # Main page component
+│   └── globals.css         # Global styles
+├── components/
+│   ├── Timer.tsx           # Countdown timer component
+│   ├── Alert.tsx           # Launch alert component
+│   └── Particles.tsx       # Particle effects component
+├── public/
+│   └── game_launch_header_image/
+│       └── game_launch.png # Header image
+├── next.config.js          # Next.js configuration
+├── package.json            # Dependencies
+└── tsconfig.json           # TypeScript configuration
 ```
 
-## 🚀 Getting Started
+## 🌐 Deploy to Vercel
 
-### Local Development
-
-1. Clone the repository:
-```bash
-git clone https://github.com/your-username/GameLaunchAlarm.git
-cd GameLaunchAlarm
-```
-
-2. Open `index.html` in your web browser
-
-That's it! No build process or dependencies required.
-
-### Deploy to Vercel
+### Option 1: Via Vercel Website (Recommended)
 
 1. Push your code to GitHub
 2. Go to [Vercel](https://vercel.com)
-3. Import your GitHub repository
-4. Vercel will auto-detect it as a static site
-5. Click Deploy!
+3. Click "Add New..." → "Project"
+4. Import your GitHub repository
+5. Vercel will auto-detect Next.js settings
+6. Click "Deploy"
+7. Your site will be live in 1-2 minutes!
 
-Or use the Vercel CLI:
+### Option 2: Via Vercel CLI
+
 ```bash
-npm i -g vercel
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
 vercel
+
+# For production
+vercel --prod
 ```
 
-## 🎯 Features Breakdown
+## ✅ Features Breakdown
 
 ### Timer Functionality
 - Accurate countdown to the exact launch time
@@ -100,12 +133,6 @@ Works on all modern browsers:
 - Safari (latest)
 - Opera (latest)
 
-Requires:
-- ES6 JavaScript support
-- CSS3 support
-- Web Audio API (for alerts)
-- Web Notifications API (optional)
-
 ## 📝 License
 
 This project is for educational/personal use. Call of Duty and Black Ops are trademarks of Activision Publishing, Inc.
@@ -113,10 +140,6 @@ This project is for educational/personal use. Call of Duty and Black Ops are tra
 ## 🤝 Contributing
 
 Feel free to fork this project and customize it for other game launches!
-
-## 📧 Contact
-
-For questions or issues, please open an issue on GitHub.
 
 ---
 
