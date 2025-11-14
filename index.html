@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Countdown to Call of Duty: Black Ops 7 launch - Available November 14, 2025 at Midnight PST">
+    <title>Call of Duty: Black Ops 7 - Launch Countdown</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <header class="main-header">
+            <div class="cod-logo">CALL OF DUTY</div>
+            <div class="game-title">BLACK OPS 7</div>
+        </header>
+
+        <div class="content">
+            <div class="header-image-container">
+                <img src="game_launch_header_image/game_launch.png" alt="Black Ops 7 Launch" class="header-image">
+            </div>
+
+            <div class="launch-info">
+                <h1 class="title">OPERATION LAUNCH</h1>
+                <p class="subtitle">Available at Midnight PST</p>
+                <p class="date">November 14, 2025</p>
+            </div>
+            
+            <div class="timer-container">
+                <div class="time-unit">
+                    <div class="time-value" id="days">00</div>
+                    <div class="time-label">Days</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">Hours</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">Minutes</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">Seconds</div>
+                </div>
+            </div>
+
+            <div class="status" id="status">
+                <span class="status-icon">⚡</span>
+                <span class="status-text">Standing by for launch...</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">🎮</div>
+                    <div class="info-title">Platforms</div>
+                    <div class="info-text">PC • Xbox • PlayStation</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⏱️</div>
+                    <div class="info-title">Preload</div>
+                    <div class="info-text">Available Now</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-title">Timezone</div>
+                    <div class="info-text">Pacific Standard Time</div>
+                </div>
+            </div>
+
+            <div class="trailer-container">
+                <h2 class="section-title">OFFICIAL TRAILER</h2>
+                <iframe 
+                    class="trailer-video"
+                    src="https://www.youtube.com/embed/7qX66lBJHTg?start=1&autoplay=0&rel=0"
+                    title="Black Ops 7 Trailer"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <footer class="footer">
+                <p>Stay locked and loaded. The mission begins soon.</p>
+                <p class="footer-small">© 2025 Activision Publishing, Inc. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+    
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-box">
+            <div class="alert-icon">🚨</div>
+            <h2>MISSION GO</h2>
+            <p>Black Ops 7 is now available!</p>
+            <p class="alert-subtext">Time to deploy, soldier.</p>
+            <button onclick="dismissAlert()" class="alert-button">ACKNOWLEDGED</button>
+        </div>
+    </div>
+    
+    <script src="timer.js"></script>
+</body>
+</html>
+
