@@ -103,6 +103,19 @@ export default function Home() {
                 </div>
                 <div className="purchase-button-arrow">→</div>
               </a>
+              <a 
+                href="https://store.playstation.com/en-us/product/UP0002-PPSA01649_00-CODBO7VAULT00001" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="purchase-button playstation-button"
+              >
+                <div className="purchase-button-icon">🎮</div>
+                <div className="purchase-button-content">
+                  <div className="purchase-button-title">PlayStation</div>
+                  <div className="purchase-button-subtitle">BUY VAULT EDITION BEFORE MIDNIGHT</div>
+                </div>
+                <div className="purchase-button-arrow">→</div>
+              </a>
             </div>
           </div>
 

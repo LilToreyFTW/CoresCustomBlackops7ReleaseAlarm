@@ -585,6 +585,17 @@ body {
     box-shadow: 0 10px 30px rgba(18, 124, 18, 0.4);
 }
 
+.playstation-button {
+    background: linear-gradient(135deg, #003087 0%, #00439f 100%);
+    border-color: rgba(0, 102, 204, 0.5);
+}
+
+.playstation-button:hover {
+    background: linear-gradient(135deg, #00439f 0%, #0055c7 100%);
+    border-color: rgba(0, 102, 204, 0.8);
+    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+}
+
 .purchase-button-icon {
     font-size: 2.5rem;
     flex-shrink: 0;
