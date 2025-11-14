@@ -1,0 +1,38 @@
+name: Deploy AI Clip Generator
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          cd ai-clip-generator
+          npm ci
+
+      - name: Build Docker image
+        run: |
+          cd ai-clip-generator
+          docker build -t cod-clip-generator:latest .
+
+      # Add deployment steps for your chosen platform
+      # Example for Railway:
+      # - name: Deploy to Railway
+      #   uses: bervProject/railway-deploy@v1.0.0
+      #   with:
+      #     railway_token: ${{ secrets.RAILWAY_TOKEN }}
+      #     service: cod-clip-generator
+

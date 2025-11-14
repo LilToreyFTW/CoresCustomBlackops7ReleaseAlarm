@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: cod-clip-generator
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: REDIS_HOST
+        fromService:
+          name: redis
+          type: redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          name: redis
+          type: redis
+          property: port
+    healthCheckPath: /api/health
+
+  - type: redis
+    name: redis
+    plan: starter
+

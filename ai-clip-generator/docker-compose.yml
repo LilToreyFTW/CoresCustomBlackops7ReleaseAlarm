@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  ai-clip-generator:
+    build: .
+    container_name: cod-clip-generator
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PORT=3001
+    volumes:
+      - ./downloads:/app/downloads
+      - ./clips:/app/clips
+      - ./montages:/app/montages
+      - ./processed:/app/processed
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: cod-clip-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+
