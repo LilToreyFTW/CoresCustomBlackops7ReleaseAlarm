@@ -76,6 +76,16 @@ export default function Home() {
               <h2 className="section-title">PRE-ORDER NOW</h2>
               <p className="purchase-subtitle">Get the Vault Edition before midnight!</p>
             </div>
+            <div className="vault-edition-image-container">
+              <Image
+                src="/Vault-Edition-Image/G5llxqsWAAEZHOn.jpeg"
+                alt="Call of Duty Black Ops 7 Vault Edition"
+                width={800}
+                height={600}
+                className="vault-edition-image"
+                priority={false}
+              />
+            </div>
             <div className="purchase-options">
               <a 
                 href="https://store.steampowered.com/app/1938090/Call_of_Duty/" 
