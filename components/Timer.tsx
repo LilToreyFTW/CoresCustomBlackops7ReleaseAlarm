@@ -2,9 +2,65 @@
 
 import { useEffect, useState, useRef } from 'react'
 
-// Target date: November 14, 2025 at 12:00 AM PST
-// PST is UTC-8, so midnight PST = 8:00 AM UTC on November 14, 2025
-const TARGET_DATE = new Date('2025-11-14T08:00:00Z')
+/**
+ * Get midnight PST/PDT on a specific date
+ * Properly handles daylight saving time transitions using Intl API
+ * This ensures accuracy regardless of when the code runs
+ */
+function getMidnightPST(year: number, month: number, day: number): Date {
+  // Use Intl API to properly handle timezone conversion
+  // We'll find the UTC time that corresponds to midnight in America/Los_Angeles
+  
+  // Start with an approximate UTC time (assuming PST, UTC-8)
+  // November 14, 2025 should be PST (DST ends Nov 2), so midnight PST = 8:00 AM UTC
+  let candidateUTC = new Date(Date.UTC(year, month - 1, day, 8, 0, 0))
+  
+  // Create formatter for America/Los_Angeles timezone
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  })
+  
+  // Binary search approach: find the exact UTC time that gives us midnight PST
+  // We'll check and adjust until we get exactly 00:00:00 in PST
+  let attempts = 0
+  const maxAttempts = 10
+  
+  while (attempts < maxAttempts) {
+    const parts = formatter.formatToParts(candidateUTC)
+    const hour = parseInt(parts.find(p => p.type === 'hour')?.value || '0')
+    const minute = parseInt(parts.find(p => p.type === 'minute')?.value || '0')
+    const second = parseInt(parts.find(p => p.type === 'second')?.value || '0')
+    
+    // If we've found midnight, return it
+    if (hour === 0 && minute === 0 && second === 0) {
+      return candidateUTC
+    }
+    
+    // Adjust the UTC time
+    // If PST time is ahead, we need to subtract from UTC
+    // If PST time is behind, we need to add to UTC
+    const totalSecondsOff = hour * 3600 + minute * 60 + second
+    candidateUTC = new Date(candidateUTC.getTime() - totalSecondsOff * 1000)
+    
+    attempts++
+  }
+  
+  // Fallback: return the best approximation
+  // For November 14, 2025, DST has ended, so it's PST (UTC-8)
+  // Midnight PST = 8:00 AM UTC
+  return new Date(Date.UTC(year, month - 1, day, 8, 0, 0))
+}
+
+// Target date: November 14, 2025 at 12:00 AM PST/PDT
+// Dynamically calculated to account for DST
+const TARGET_DATE = getMidnightPST(2025, 11, 14)
 
 interface TimerProps {
   onLaunch: () => void
@@ -39,7 +95,11 @@ export default function Timer({ onLaunch }: TimerProps) {
     }
 
     const updateTimer = () => {
+      // Get current time in UTC (most accurate for calculations)
       const now = new Date()
+      
+      // Calculate difference to target date
+      // TARGET_DATE is already in UTC (representing midnight PST/PDT)
       const difference = TARGET_DATE.getTime() - now.getTime()
 
       if (difference <= 0) {
