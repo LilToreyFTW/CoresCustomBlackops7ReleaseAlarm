@@ -70,6 +70,38 @@ export default function Home() {
             />
           </div>
 
+          <div className="kick-section">
+            <div className="kick-header">
+              <div className="kick-icon">🎮</div>
+              <h2 className="section-title">WATCH LIVE ON KICK</h2>
+            </div>
+            <div className="kick-content">
+              <p className="kick-description">
+                Join us live on Kick when Black Ops 7 launches! We'll be streaming the game as soon as it's available.
+              </p>
+              <a 
+                href="https://kick.com/liltorey" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="kick-link"
+              >
+                <span className="kick-link-text">Watch Live on Kick</span>
+                <span className="kick-link-icon">🔴</span>
+              </a>
+              <div className="kick-preview">
+                <h3 className="kick-preview-title">Game Preview</h3>
+                <iframe 
+                  className="trailer-video kick-video"
+                  src="https://www.youtube.com/embed/7qX66lBJHTg?start=1&autoplay=0&rel=0"
+                  title="Black Ops 7 Preview"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+
           <footer className="footer">
             <p>Stay locked and loaded. The mission begins soon.</p>
             <p className="footer-small">© 2025 Activision Publishing, Inc. All rights reserved.</p>

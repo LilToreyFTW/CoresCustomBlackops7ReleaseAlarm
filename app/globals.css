@@ -393,6 +393,104 @@ body {
     border: 2px solid rgba(227, 30, 36, 0.5);
 }
 
+.kick-section {
+    margin: 50px 0 30px 0;
+    padding: 40px;
+    background: rgba(42, 42, 42, 0.6);
+    border: 2px solid rgba(0, 255, 0, 0.3);
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.6),
+        0 0 50px rgba(0, 255, 0, 0.2);
+}
+
+.kick-header {
+    margin-bottom: 30px;
+}
+
+.kick-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.kick-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.kick-description {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.kick-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #53fc18 0%, #00d4aa 100%);
+    color: #000;
+    padding: 18px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: var(--font-orbitron), sans-serif;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 0, 0.4),
+        0 0 30px rgba(0, 255, 0, 0.2);
+    border: 2px solid rgba(0, 255, 0, 0.5);
+}
+
+.kick-link:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 8px 25px rgba(0, 255, 0, 0.6),
+        0 0 50px rgba(0, 255, 0, 0.4);
+    background: linear-gradient(135deg, #6aff2e 0%, #1affc4 100%);
+}
+
+.kick-link:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.kick-link-text {
+    text-transform: uppercase;
+}
+
+.kick-link-icon {
+    font-size: 1.6rem;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.kick-preview {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.kick-preview-title {
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--cod-gold);
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.kick-video {
+    margin-top: 0;
+}
+
 .footer {
     margin-top: 40px;
     padding-top: 30px;
@@ -573,6 +671,24 @@ body {
     
     .alert-icon {
         font-size: 4rem;
+    }
+    
+    .kick-section {
+        padding: 25px 20px;
+        margin: 30px 0 20px 0;
+    }
+    
+    .kick-description {
+        font-size: 1.1rem;
+    }
+    
+    .kick-link {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+    }
+    
+    .kick-preview-title {
+        font-size: 1.5rem;
     }
 }
 
