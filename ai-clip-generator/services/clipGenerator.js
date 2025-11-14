@@ -96,9 +96,42 @@ class ClipGenerator {
     // TODO: Add transitions, music, effects
     // - Crossfade transitions between clips
     // - Background music
-    // - Text overlays
-    // - Slow motion effects
-    return montagePath;
+    // - Text overlays showing "TSlizzleKilla007" and kill stats
+    // - Slow motion effects on headshots
+    // - Kill counter overlay
+    // - Weapon name overlays
+    
+    const enhancedPath = montagePath.replace('.mp4', '-enhanced.mp4');
+    
+    return new Promise((resolve, reject) => {
+      // TODO: Use FFmpeg to add:
+      // - Fade in/out transitions
+      // - Background music
+      // - Text overlays with player name and stats
+      
+      // For now, return original
+      resolve(montagePath);
+    });
+  }
+
+  /**
+   * Create montage with player name overlay
+   * @param {Array} clipPaths - Array of clip objects with metadata
+   * @param {string} playerName - Player name to display
+   * @param {string} outputName - Output montage filename
+   * @returns {string}
+   */
+  async createPlayerMontage(clipPaths, playerName, outputName) {
+    // TODO: Create montage with:
+    // - Player name overlay: "TSlizzleKilla007"
+    // - Kill counter
+    // - Weapon stats
+    // - Best kills highlighted
+    
+    return this.createMontage(
+      clipPaths.map(c => typeof c === 'string' ? c : c.path),
+      outputName
+    );
   }
 }
 

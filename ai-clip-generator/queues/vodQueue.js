@@ -42,26 +42,38 @@ VODQueue.process('process-vod', async (job) => {
     const detections = await killFeedDetector.processVideo(videoPath);
     job.progress(60);
 
-    // Step 4: Extract clips from kill feed moments
-    console.log('Step 4: Extracting clips...');
+    // Step 4: Extract clips from TSlizzleKilla007's kill feed moments
+    console.log('Step 4: Extracting clips of TSlizzleKilla007 kills...');
     const clipPaths = [];
     for (let i = 0; i < detections.length; i++) {
       const detection = detections[i];
-      const clipPath = await clipGenerator.extractClip(
-        videoPath,
-        detection.timestamp - 2, // 2 seconds before kill
-        5, // 5 second clips
-        `kill-${i + 1}`
-      );
-      clipPaths.push(clipPath);
+      
+      // Only process if TSlizzleKilla007 is the killer
+      if (detection.killer && detection.killer.toLowerCase().includes('tslizzlekilla007')) {
+        const clipPath = await clipGenerator.extractClip(
+          videoPath,
+          detection.timestamp - 3, // 3 seconds before kill (to capture the action)
+          6, // 6 second clips (to show full kill sequence)
+          `tslizzlekilla007-kill-${i + 1}-${detection.victim || 'enemy'}`
+        );
+        clipPaths.push({
+          path: clipPath,
+          timestamp: detection.timestamp,
+          victim: detection.victim,
+          weapon: detection.weapon,
+          type: detection.type
+        });
+        console.log(`✅ Extracted kill clip: ${detection.victim} with ${detection.weapon} at ${detection.timestamp}s`);
+      }
       job.progress(60 + (i + 1) * 10 / detections.length);
     }
 
-    // Step 5: Create montage
-    console.log('Step 5: Creating montage...');
+    // Step 5: Create montage of TSlizzleKilla007's kills
+    console.log(`Step 5: Creating montage of ${clipPaths.length} kills by TSlizzleKilla007...`);
+    const clipFilePaths = clipPaths.map(c => c.path);
     const montagePath = await clipGenerator.createMontage(
-      clipPaths,
-      `montage-${Date.now()}`
+      clipFilePaths,
+      `tslizzlekilla007-montage-${Date.now()}`
     );
     job.progress(95);
 

@@ -1,15 +1,17 @@
-# Autonomous AI Clip Generator for COD Kill Feeds
+# Autonomous AI Clip Generator for TSlizzleKilla007 Kills
 
-An AI-powered system that automatically watches Kick VODs on your website, detects Call of Duty kill feeds, and generates montage clips.
+An AI-powered system that automatically watches Kick VODs on your website, detects when **TSlizzleKilla007** gets kills in Call of Duty, and generates montage clips of YOUR kills only.
 
 ## 🎯 Features
 
 - **Autonomous VOD Monitoring**: Automatically detects and processes Kick VODs on your website
-- **Kill Feed Detection**: AI-powered computer vision to detect kill feeds in COD gameplay
-- **Automatic Clip Generation**: Creates individual clips from kill moments
-- **Montage Creation**: Compiles clips into epic montages
+- **Player-Specific Detection**: AI detects kills specifically by **TSlizzleKilla007** (your in-game name)
+- **Kill Feed Analysis**: Uses OCR to read kill feed text and identify your kills
+- **Automatic Clip Generation**: Creates individual clips from YOUR kill moments only
+- **Montage Creation**: Compiles YOUR kills into epic montages
 - **Background Processing**: Runs invisibly while users watch VODs
 - **Queue System**: Handles multiple VODs with job queuing
+- **Smart Filtering**: Only captures kills where YOU are the killer, not deaths
 
 ## 🏗️ Architecture
 

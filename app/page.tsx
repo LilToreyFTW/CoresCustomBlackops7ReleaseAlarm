@@ -5,12 +5,14 @@ import Image from 'next/image'
 import Timer from '@/components/Timer'
 import Alert from '@/components/Alert'
 import Particles from '@/components/Particles'
+import VODWatcher from '@/components/VODWatcher'
 
 export default function Home() {
   const [showAlert, setShowAlert] = useState(false)
 
   return (
     <>
+      <VODWatcher />
       <div className="background-overlay"></div>
       <Particles />
       
