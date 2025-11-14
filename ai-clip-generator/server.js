@@ -102,9 +102,24 @@ createBullBoard({
 
 app.use('/admin/queues', serverAdapter.getRouter());
 
+/**
+ * API Endpoint: Health check
+ * GET /api/health
+ */
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    service: 'AI Clip Generator',
+    player: 'TSlizzleKilla007'
+  });
+});
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 AI Clip Generator Server running on port ${PORT}`);
   console.log(`📊 Queue Dashboard: http://localhost:${PORT}/admin/queues`);
+  console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🎮 Tracking kills for: TSlizzleKilla007`);
 });
 
