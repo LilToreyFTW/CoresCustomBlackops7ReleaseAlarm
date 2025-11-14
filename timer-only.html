@@ -33,8 +33,10 @@
             justify-content: center;
             align-items: center;
             color: #fff;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
+            margin: 0;
+            padding: 0;
         }
 
         .background-overlay {
@@ -61,7 +63,8 @@
         }
 
         .timer-only-container {
-            min-height: 100vh;
+            width: 500px;
+            height: 500px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -69,14 +72,13 @@
             padding: 20px;
             position: relative;
             z-index: 1;
-            width: 100%;
-            max-width: 900px;
+            margin: 0 auto;
         }
 
         .timer-header {
             text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
+            margin-bottom: 20px;
+            padding: 10px 0;
         }
 
         .cod-logo-small {
@@ -101,22 +103,22 @@
 
         .game-title-small {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #fff;
             text-shadow: 
                 0 0 10px rgba(255, 255, 255, 0.5),
                 0 0 20px rgba(255, 255, 255, 0.3),
                 2px 2px 4px rgba(0, 0, 0, 0.8);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .timer-only-content {
             background: rgba(26, 26, 26, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 50px 40px;
+            padding: 20px;
             box-shadow: 
                 0 8px 32px 0 rgba(0, 0, 0, 0.6),
                 inset 0 0 100px rgba(227, 30, 36, 0.1);
@@ -124,6 +126,10 @@
             text-align: center;
             position: relative;
             width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .timer-only-content::before {
@@ -195,17 +201,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            margin: 40px 0;
+            gap: 8px;
+            margin: 15px 0;
             flex-wrap: wrap;
         }
 
         .time-unit {
             background: linear-gradient(135deg, rgba(227, 30, 36, 0.2), rgba(255, 107, 53, 0.2));
             border: 2px solid rgba(227, 30, 36, 0.5);
-            border-radius: 15px;
-            padding: 25px 20px;
-            min-width: 130px;
+            border-radius: 10px;
+            padding: 10px 8px;
+            min-width: 70px;
             box-shadow: 
                 0 4px 15px rgba(0, 0, 0, 0.4),
                 inset 0 0 20px rgba(227, 30, 36, 0.1);
@@ -245,22 +251,22 @@
 
         .time-value {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
+            font-size: 2rem;
             font-weight: 900;
             font-variant-numeric: tabular-nums;
             text-shadow: 
                 0 0 20px rgba(255, 255, 255, 0.8),
                 0 0 40px rgba(227, 30, 36, 0.6);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: #fff;
             position: relative;
             z-index: 1;
         }
 
         .time-label {
-            font-size: 1rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 1.5px;
             color: rgba(255, 255, 255, 0.8);
             font-weight: 600;
             position: relative;
@@ -269,7 +275,7 @@
 
         .separator {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: var(--cod-red);
             text-shadow: 0 0 20px rgba(227, 30, 36, 0.8);
@@ -286,22 +292,22 @@
         }
 
         .status {
-            font-size: 1.4rem;
-            margin-top: 30px;
-            padding: 20px;
+            font-size: 0.75rem;
+            margin-top: 15px;
+            padding: 8px 10px;
             background: rgba(227, 30, 36, 0.2);
             border: 2px solid rgba(227, 30, 36, 0.5);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 6px;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .status-icon {
-            font-size: 1.6rem;
+            font-size: 0.9rem;
             animation: pulse 1.5s ease-in-out infinite;
         }
 
@@ -414,65 +420,7 @@
             transform: scale(0.95);
         }
 
-        @media (max-width: 768px) {
-            .timer-only-container {
-                padding: 15px;
-            }
-            
-            .timer-only-content {
-                padding: 30px 20px;
-            }
-            
-            .game-title-small {
-                font-size: 2rem;
-            }
-            
-            .cod-logo-small {
-                font-size: 0.9rem;
-                letter-spacing: 4px;
-            }
-            
-            .title-minimal {
-                font-size: 1.5rem;
-            }
-            
-            .subtitle-minimal {
-                font-size: 1.1rem;
-            }
-            
-            .time-value {
-                font-size: 2.8rem;
-            }
-            
-            .separator {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .game-title-small {
-                font-size: 1.5rem;
-                letter-spacing: 2px;
-            }
-            
-            .cod-logo-small {
-                font-size: 0.8rem;
-                letter-spacing: 3px;
-            }
-            
-            .title-minimal {
-                font-size: 1.3rem;
-            }
-            
-            .time-value {
-                font-size: 2.2rem;
-            }
-            
-            .time-unit {
-                min-width: 75px;
-                padding: 15px 10px;
-            }
-        }
+        /* Fixed 500x500 size - no responsive changes needed */
     </style>
 </head>
 <body>
