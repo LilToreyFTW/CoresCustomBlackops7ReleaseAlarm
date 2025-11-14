@@ -70,6 +70,42 @@ export default function Home() {
             />
           </div>
 
+          <div className="purchase-section">
+            <div className="purchase-header">
+              <div className="purchase-icon">💰</div>
+              <h2 className="section-title">PRE-ORDER NOW</h2>
+              <p className="purchase-subtitle">Get the Vault Edition before midnight!</p>
+            </div>
+            <div className="purchase-options">
+              <a 
+                href="https://store.steampowered.com/app/1938090/Call_of_Duty/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="purchase-button steam-button"
+              >
+                <div className="purchase-button-icon">🎮</div>
+                <div className="purchase-button-content">
+                  <div className="purchase-button-title">Steam</div>
+                  <div className="purchase-button-subtitle">BUY VAULT EDITION BEFORE MIDNIGHT</div>
+                </div>
+                <div className="purchase-button-arrow">→</div>
+              </a>
+              <a 
+                href="https://www.xbox.com/en-US/games/call-of-duty-black-ops-7#purchaseoptions" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="purchase-button xbox-button"
+              >
+                <div className="purchase-button-icon">🎯</div>
+                <div className="purchase-button-content">
+                  <div className="purchase-button-title">Xbox</div>
+                  <div className="purchase-button-subtitle">BUY VAULT EDITION BEFORE MIDNIGHT</div>
+                </div>
+                <div className="purchase-button-arrow">→</div>
+              </a>
+            </div>
+          </div>
+
           <div className="kick-section">
             <div className="kick-header">
               <div className="kick-icon">🎮</div>
