@@ -34,8 +34,8 @@ export default function Home() {
 
           <div className="launch-info">
             <h1 className="title">OPERATION LAUNCH</h1>
-            <p className="subtitle">Available at Midnight PST</p>
-            <p className="date">November 14, 2025</p>
+            <p className="subtitle">PC Launch: 9:00 PM PST (Steam & Battle.net)</p>
+            <p className="date">November 13, 2025</p>
           </div>
           
           <Timer onLaunch={() => setShowAlert(true)} />

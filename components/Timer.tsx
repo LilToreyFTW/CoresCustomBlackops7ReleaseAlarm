@@ -3,17 +3,20 @@
 import { useEffect, useState, useRef } from 'react'
 
 /**
- * Get midnight PST/PDT on a specific date
+ * Get a specific time PST/PDT on a specific date
  * Properly handles daylight saving time transitions using Intl API
  * This ensures accuracy regardless of when the code runs
  */
-function getMidnightPST(year: number, month: number, day: number): Date {
+function getTimePST(year: number, month: number, day: number, hour: number, minute: number = 0): Date {
   // Use Intl API to properly handle timezone conversion
-  // We'll find the UTC time that corresponds to midnight in America/Los_Angeles
+  // We'll find the UTC time that corresponds to the specified time in America/Los_Angeles
   
   // Start with an approximate UTC time (assuming PST, UTC-8)
-  // November 14, 2025 should be PST (DST ends Nov 2), so midnight PST = 8:00 AM UTC
-  let candidateUTC = new Date(Date.UTC(year, month - 1, day, 8, 0, 0))
+  // November 13, 2025 should be PST (DST ends Nov 2), so 9 PM PST = 5:00 AM UTC next day
+  // For 9 PM on Nov 13, that's 5:00 AM UTC on Nov 14
+  const targetHour = hour === 21 ? 5 : hour + 8 // 9 PM PST = 5 AM UTC next day
+  const targetDay = hour === 21 ? day + 1 : day
+  let candidateUTC = new Date(Date.UTC(year, month - 1, targetDay, targetHour, minute, 0))
   
   // Create formatter for America/Los_Angeles timezone
   const formatter = new Intl.DateTimeFormat('en-US', {
@@ -27,40 +30,43 @@ function getMidnightPST(year: number, month: number, day: number): Date {
     hour12: false,
   })
   
-  // Binary search approach: find the exact UTC time that gives us midnight PST
-  // We'll check and adjust until we get exactly 00:00:00 in PST
+  // Binary search approach: find the exact UTC time that gives us the target time in PST
+  // We'll check and adjust until we get exactly the target hour:minute in PST
   let attempts = 0
   const maxAttempts = 10
   
   while (attempts < maxAttempts) {
     const parts = formatter.formatToParts(candidateUTC)
-    const hour = parseInt(parts.find(p => p.type === 'hour')?.value || '0')
-    const minute = parseInt(parts.find(p => p.type === 'minute')?.value || '0')
-    const second = parseInt(parts.find(p => p.type === 'second')?.value || '0')
+    const pstHour = parseInt(parts.find(p => p.type === 'hour')?.value || '0')
+    const pstMinute = parseInt(parts.find(p => p.type === 'minute')?.value || '0')
+    const pstSecond = parseInt(parts.find(p => p.type === 'second')?.value || '0')
+    const pstDay = parseInt(parts.find(p => p.type === 'day')?.value || '0')
     
-    // If we've found midnight, return it
-    if (hour === 0 && minute === 0 && second === 0) {
+    // If we've found the target time and day, return it
+    if (pstHour === hour && pstMinute === minute && pstSecond === 0 && pstDay === day) {
       return candidateUTC
     }
     
     // Adjust the UTC time
-    // If PST time is ahead, we need to subtract from UTC
-    // If PST time is behind, we need to add to UTC
-    const totalSecondsOff = hour * 3600 + minute * 60 + second
+    // Calculate the difference in seconds
+    const hourDiff = pstHour - hour
+    const minuteDiff = pstMinute - minute
+    const secondDiff = pstSecond
+    const totalSecondsOff = (hourDiff * 3600) + (minuteDiff * 60) + secondDiff
     candidateUTC = new Date(candidateUTC.getTime() - totalSecondsOff * 1000)
     
     attempts++
   }
   
   // Fallback: return the best approximation
-  // For November 14, 2025, DST has ended, so it's PST (UTC-8)
-  // Midnight PST = 8:00 AM UTC
-  return new Date(Date.UTC(year, month - 1, day, 8, 0, 0))
+  // For November 13, 2025, DST has ended, so it's PST (UTC-8)
+  // 9 PM PST on Nov 13 = 5:00 AM UTC on Nov 14
+  return new Date(Date.UTC(year, month - 1, day + 1, 5, 0, 0))
 }
 
-// Target date: November 14, 2025 at 12:00 AM PST/PDT
+// Target date: November 13, 2025 at 9:00 PM PST/PDT (PC launch for Steam/Battle.net)
 // Dynamically calculated to account for DST
-const TARGET_DATE = getMidnightPST(2025, 11, 14)
+const TARGET_DATE = getTimePST(2025, 11, 13, 21, 0) // 21:00 = 9:00 PM
 
 interface TimerProps {
   onLaunch: () => void
