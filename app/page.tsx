@@ -189,11 +189,11 @@ export default function Home() {
                 <span className="kick-link-icon">🔴</span>
               </a>
               <div className="kick-preview">
-                <h3 className="kick-preview-title">Game Preview</h3>
+                <h3 className="kick-preview-title">Latest VOD</h3>
                 <iframe 
                   className="trailer-video kick-video"
-                  src="https://www.youtube.com/embed/7qX66lBJHTg?start=1&autoplay=0&rel=0"
-                  title="Black Ops 7 Preview"
+                  src="https://player.kick.com/liltorey/videos/53dc400d-213c-4a6b-9722-ca1c88a62929"
+                  title="Latest Kick VOD"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
