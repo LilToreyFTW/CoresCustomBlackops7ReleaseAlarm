@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Call of Duty: Black Ops 7 Launch Countdown Timer">
+    <title>Black Ops 7 - Launch Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cod-red: #e31e24;
+            --cod-dark: #0a0a0a;
+            --cod-gray: #1a1a1a;
+            --cod-light-gray: #2a2a2a;
+            --cod-gold: #ffd700;
+            --cod-orange: #ff6b35;
+            --cod-blue: #00a8ff;
+        }
+
+        body {
+            font-family: 'Rajdhani', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--cod-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(227, 30, 36, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            z-index: -2;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .timer-only-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .timer-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+
+        .cod-logo-small {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--cod-red);
+            text-shadow: 0 0 20px rgba(227, 30, 36, 0.8);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(227, 30, 36, 0.8);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(227, 30, 36, 1), 0 0 40px rgba(227, 30, 36, 0.6);
+            }
+        }
+
+        .game-title-small {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.3),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .timer-only-content {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.6),
+                inset 0 0 100px rgba(227, 30, 36, 0.1);
+            border: 2px solid rgba(227, 30, 36, 0.3);
+            text-align: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .timer-only-content::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--cod-red), var(--cod-orange), var(--cod-red));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .launch-info-minimal {
+            margin-bottom: 40px;
+        }
+
+        .title-minimal {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            color: var(--cod-gold);
+            letter-spacing: 3px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .subtitle-minimal {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .date-minimal {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: var(--cod-blue);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.2), rgba(255, 107, 53, 0.2));
+            border: 2px solid rgba(227, 30, 36, 0.5);
+            border-radius: 15px;
+            padding: 25px 20px;
+            min-width: 130px;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.4),
+                inset 0 0 20px rgba(227, 30, 36, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-unit::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .time-unit:hover {
+            transform: translateY(-5px);
+            border-color: var(--cod-red);
+            box-shadow: 
+                0 8px 25px rgba(227, 30, 36, 0.5),
+                inset 0 0 30px rgba(227, 30, 36, 0.2);
+        }
+
+        .time-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(227, 30, 36, 0.6);
+            margin-bottom: 10px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .time-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .separator {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--cod-red);
+            text-shadow: 0 0 20px rgba(227, 30, 36, 0.8);
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .status {
+            font-size: 1.4rem;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(227, 30, 36, 0.2);
+            border: 2px solid rgba(227, 30, 36, 0.5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .status-icon {
+            font-size: 1.6rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .status-text {
+            color: #fff;
+        }
+
+        .alert-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .alert-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, var(--cod-red), var(--cod-orange));
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.8),
+                0 0 100px rgba(227, 30, 36, 0.6);
+            animation: bounce 0.6s ease;
+            max-width: 600px;
+            width: 90%;
+            border: 3px solid var(--cod-gold);
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .alert-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .alert-box h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 3px;
+            color: #fff;
+        }
+
+        .alert-box p {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .alert-subtext {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .alert-button {
+            background: var(--cod-dark);
+            color: var(--cod-gold);
+            border: 2px solid var(--cod-gold);
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+        }
+
+        .alert-button:hover {
+            transform: scale(1.05);
+            background: var(--cod-gold);
+            color: var(--cod-dark);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        .alert-button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .timer-only-container {
+                padding: 15px;
+            }
+            
+            .timer-only-content {
+                padding: 30px 20px;
+            }
+            
+            .game-title-small {
+                font-size: 2rem;
+            }
+            
+            .cod-logo-small {
+                font-size: 0.9rem;
+                letter-spacing: 4px;
+            }
+            
+            .title-minimal {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle-minimal {
+                font-size: 1.1rem;
+            }
+            
+            .time-value {
+                font-size: 2.8rem;
+            }
+            
+            .separator {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-title-small {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .cod-logo-small {
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+            }
+            
+            .title-minimal {
+                font-size: 1.3rem;
+            }
+            
+            .time-value {
+                font-size: 2.2rem;
+            }
+            
+            .time-unit {
+                min-width: 75px;
+                padding: 15px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="timer-only-container">
+        <header class="timer-header">
+            <div class="cod-logo-small">CALL OF DUTY</div>
+            <div class="game-title-small">BLACK OPS 7</div>
+        </header>
+
+        <div class="timer-only-content">
+            <div class="launch-info-minimal">
+                <h1 class="title-minimal">OPERATION LAUNCH</h1>
+                <p class="subtitle-minimal">PC Launch: 9:00 PM PST</p>
+                <p class="date-minimal">November 13, 2025</p>
+            </div>
+            
+            <div class="timer-container">
+                <div class="time-unit">
+                    <div class="time-value" id="days">00</div>
+                    <div class="time-label">Days</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">Hours</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">Minutes</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">Seconds</div>
+                </div>
+            </div>
+
+            <div class="status" id="status">
+                <span class="status-icon">⚡</span>
+                <span class="status-text">Standing by for launch...</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-box">
+            <div class="alert-icon">🚨</div>
+            <h2>MISSION GO</h2>
+            <p>Black Ops 7 is now available!</p>
+            <p class="alert-subtext">Time to deploy, soldier.</p>
+            <button onclick="dismissAlert()" class="alert-button">ACKNOWLEDGED</button>
+        </div>
+    </div>
+    
+    <script>
+        // Target date: November 13, 2025 at 9:00 PM PST
+        // PST is UTC-8, so 9 PM PST = 5:00 AM UTC on November 14, 2025
+        const TARGET_DATE = new Date('2025-11-14T05:00:00Z');
+
+        // DOM elements
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+        const statusElement = document.getElementById('status');
+        const alertOverlay = document.getElementById('alertOverlay');
+
+        let alertShown = false;
+        let audioContext = null;
+
+        // Initialize audio context
+        function initAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.log('Web Audio API not supported');
+            }
+        }
+
+        // Play alert sound
+        function playAlertSound() {
+            if (!audioContext) {
+                initAudio();
+            }
+            
+            if (audioContext) {
+                // First beep
+                const oscillator1 = audioContext.createOscillator();
+                const gainNode1 = audioContext.createGain();
+                oscillator1.connect(gainNode1);
+                gainNode1.connect(audioContext.destination);
+                oscillator1.frequency.value = 800;
+                oscillator1.type = 'sine';
+                gainNode1.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                oscillator1.start(audioContext.currentTime);
+                oscillator1.stop(audioContext.currentTime + 0.5);
+
+                // Second beep
+                setTimeout(() => {
+                    const oscillator2 = audioContext.createOscillator();
+                    const gainNode2 = audioContext.createGain();
+                    oscillator2.connect(gainNode2);
+                    gainNode2.connect(audioContext.destination);
+                    oscillator2.frequency.value = 1000;
+                    oscillator2.type = 'sine';
+                    gainNode2.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    oscillator2.start(audioContext.currentTime);
+                    oscillator2.stop(audioContext.currentTime + 0.5);
+                }, 600);
+
+                // Third beep
+                setTimeout(() => {
+                    const oscillator3 = audioContext.createOscillator();
+                    const gainNode3 = audioContext.createGain();
+                    oscillator3.connect(gainNode3);
+                    gainNode3.connect(audioContext.destination);
+                    oscillator3.frequency.value = 1200;
+                    oscillator3.type = 'sine';
+                    gainNode3.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+                    oscillator3.start(audioContext.currentTime);
+                    oscillator3.stop(audioContext.currentTime + 1);
+                }, 1200);
+            }
+        }
+
+        // Format number with leading zero
+        function formatTime(value) {
+            return value.toString().padStart(2, '0');
+        }
+
+        // Update the countdown timer
+        function updateTimer() {
+            const now = new Date();
+            const difference = TARGET_DATE - now;
+            
+            if (difference <= 0) {
+                // Time has arrived!
+                daysElement.textContent = '00';
+                hoursElement.textContent = '00';
+                minutesElement.textContent = '00';
+                secondsElement.textContent = '00';
+                const statusIcon = statusElement.querySelector('.status-icon');
+                const statusText = statusElement.querySelector('.status-text');
+                if (statusIcon) statusIcon.textContent = '🎮';
+                if (statusText) {
+                    statusText.textContent = 'MISSION GO - Black Ops 7 is NOW AVAILABLE!';
+                } else {
+                    statusElement.innerHTML = '<span class="status-icon">🎮</span><span class="status-text">MISSION GO - Black Ops 7 is NOW AVAILABLE!</span>';
+                }
+                statusElement.style.background = 'rgba(76, 175, 80, 0.3)';
+                statusElement.style.borderColor = 'rgba(76, 175, 80, 0.8)';
+                statusElement.style.animation = 'pulse 1s ease-in-out infinite';
+                
+                // Show alert if not already shown
+                if (!alertShown) {
+                    alertShown = true;
+                    alertOverlay.classList.add('show');
+                    playAlertSound();
+                    
+                    // Request notification permission and send notification
+                    if ('Notification' in window && Notification.permission === 'granted') {
+                        new Notification('Black Ops 7 is Available!', {
+                            body: 'The game is now live! Time to play!',
+                            icon: '🎮',
+                            badge: '🎮'
+                        });
+                    }
+                }
+                return;
+            }
+            
+            // Calculate time units
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            
+            // Update display
+            daysElement.textContent = formatTime(days);
+            hoursElement.textContent = formatTime(hours);
+            minutesElement.textContent = formatTime(minutes);
+            secondsElement.textContent = formatTime(seconds);
+            
+            // Update status message
+            const statusIcon = statusElement.querySelector('.status-icon');
+            const statusText = statusElement.querySelector('.status-text');
+            let statusMsg = '';
+            
+            if (days > 0) {
+                statusMsg = `Standing by... ${days} day${days > 1 ? 's' : ''} until launch`;
+            } else if (hours > 0) {
+                statusMsg = `Final countdown... ${hours} hour${hours > 1 ? 's' : ''} remaining`;
+            } else if (minutes > 0) {
+                statusMsg = `Almost there... ${minutes} minute${minutes > 1 ? 's' : ''} to go`;
+            } else {
+                statusMsg = `Final seconds... ${seconds} second${seconds > 1 ? 's' : ''} remaining`;
+            }
+            
+            if (statusText) {
+                statusText.textContent = statusMsg;
+            } else {
+                statusElement.innerHTML = `<span class="status-icon">⚡</span><span class="status-text">${statusMsg}</span>`;
+            }
+        }
+
+        // Dismiss alert function
+        function dismissAlert() {
+            alertOverlay.classList.remove('show');
+        }
+
+        // Create particle effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            const particleCount = 50;
+            
+            // Add CSS animation if not already added
+            if (!document.getElementById('particle-styles')) {
+                const style = document.createElement('style');
+                style.id = 'particle-styles';
+                style.textContent = `
+                    @keyframes float {
+                        0%, 100% {
+                            transform: translateY(0) translateX(0);
+                            opacity: 0;
+                        }
+                        10% {
+                            opacity: 1;
+                        }
+                        90% {
+                            opacity: 1;
+                        }
+                        50% {
+                            transform: translateY(-100px) translateX(20px);
+                            opacity: 0.8;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Create particles
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 2px;
+                    background: rgba(227, 30, 36, 0.6);
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: float ${5 + Math.random() * 10}s infinite ease-in-out;
+                    animation-delay: ${Math.random() * 5}s;
+                    box-shadow: 0 0 10px rgba(227, 30, 36, 0.8);
+                `;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize particles
+            createParticles();
+            
+            // Request notification permission
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+            
+            // Initialize audio
+            initAudio();
+            
+            // Update timer immediately
+            updateTimer();
+            
+            // Update timer every second
+            setInterval(updateTimer, 1000);
+        });
+
+        // Also update on page visibility change to catch up if tab was inactive
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                updateTimer();
+            }
+        });
+    </script>
+</body>
+</html>
+
